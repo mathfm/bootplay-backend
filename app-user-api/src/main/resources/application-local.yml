@@ -6,9 +6,9 @@ spring:
     generate-ddl: true
     defer-datasource-initialization: true
   datasource:
-    url: jdbc:postgresql://localhost:5432/bootcamp
+    url: jdbc:postgresql://localhost:5432/postgres
     username: postgres
-    password: postgres123
+    password: postgres
 
 
 
