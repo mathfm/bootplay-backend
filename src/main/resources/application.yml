@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: bootcamp Sysmap 2024 - Fernando Santos
+
+server:
+  port: 8080
+  servlet:
+    context-path: /api
+
