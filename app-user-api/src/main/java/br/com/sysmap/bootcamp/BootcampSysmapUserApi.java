@@ -1,13 +1,13 @@
-package br.com.sysmap.appintegrationapi;
+package br.com.sysmap.bootcamp;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class BootcampSysmap2024ApiApplication {
+public class BootcampSysmapUserApi {
 
 	public static void main(String[] args) {
-		SpringApplication.run(BootcampSysmap2024ApiApplication.class, args);
+		SpringApplication.run(BootcampSysmapUserApi.class, args);
 	}
 
 }

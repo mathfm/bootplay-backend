@@ -1,10 +1,10 @@
-package br.com.sysmap.bootcamp;
+package br.com.sysmap.appintegrationapi;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class BootcampSysmapApplicationTests {
+class BootcampSysmapIntegrationApiTests {
 
 	@Test
 	void contextLoads() {
