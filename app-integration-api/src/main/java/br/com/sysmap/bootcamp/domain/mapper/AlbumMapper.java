@@ -1,6 +1,6 @@
-package br.com.sysmap.appintegrationapi.domain.mapper;
+package br.com.sysmap.bootcamp.domain.mapper;
 
-import br.com.sysmap.appintegrationapi.domain.entities.AlbumEntity;
+import br.com.sysmap.bootcamp.domain.entities.AlbumEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.Named;
 import org.mapstruct.factory.Mappers;

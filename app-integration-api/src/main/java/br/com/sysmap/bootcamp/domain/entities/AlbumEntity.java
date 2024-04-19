@@ -1,4 +1,4 @@
-package br.com.sysmap.appintegrationapi.domain.entities;
+package br.com.sysmap.bootcamp.domain.entities;
 
 import lombok.Data;
 import se.michaelthelin.spotify.enums.AlbumType;

@@ -1,7 +1,7 @@
-package br.com.sysmap.appintegrationapi.domain.web;
+package br.com.sysmap.bootcamp.web;
 
-import br.com.sysmap.appintegrationapi.domain.entities.AlbumEntity;
-import br.com.sysmap.appintegrationapi.domain.service.integration.SpotifyApi;
+import br.com.sysmap.bootcamp.domain.entities.AlbumEntity;
+import br.com.sysmap.bootcamp.domain.service.AlbumService;
 import lombok.RequiredArgsConstructor;
 import org.apache.hc.core5.http.ParseException;
 import org.springframework.http.ResponseEntity;
@@ -18,11 +18,17 @@ import java.util.List;
 @RestController
 @RequestMapping("/albums")
 public class AlbumController {
-    private final SpotifyApi spotifyApi;
+
+    private final AlbumService albumService;
 
     @GetMapping("/all")
     public ResponseEntity<List<AlbumEntity>> getAlbum(@RequestParam("search") String search) throws IOException, ParseException, SpotifyWebApiException {
-        return  ResponseEntity.ok(this.spotifyApi.getAlbums(search));
+        return  ResponseEntity.ok(this.albumService.getAlbums(search));
+    }
+
+    @GetMapping("/teste")
+    public void teste() {
+        this.albumService.teste();
     }
 
 }

@@ -1,4 +1,4 @@
-package br.com.sysmap.appintegrationapi;
+package br.com.sysmap.bootcamp;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

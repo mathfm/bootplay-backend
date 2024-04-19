@@ -1,7 +1,7 @@
-package br.com.sysmap.appintegrationapi.domain.service.integration;
+package br.com.sysmap.bootcamp.domain.service.integration;
 
-import br.com.sysmap.appintegrationapi.domain.entities.AlbumEntity;
-import br.com.sysmap.appintegrationapi.domain.mapper.AlbumMapper;
+import br.com.sysmap.bootcamp.domain.entities.AlbumEntity;
+import br.com.sysmap.bootcamp.domain.mapper.AlbumMapper;
 import com.neovisionaries.i18n.CountryCode;
 import org.apache.hc.core5.http.ParseException;
 import org.springframework.stereotype.Service;
