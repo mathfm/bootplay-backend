@@ -5,17 +5,17 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-
 import java.io.Serializable;
 import java.math.BigDecimal;
 
 @Getter
-@Setter
 @AllArgsConstructor
+@Setter
 @NoArgsConstructor
-public class WalletDto implements Serializable {
-
-    private String email;
+public class AlbumDto implements Serializable {
+    private String name;
+    private String idSpotify;
+    private String artistName;
+    private String imageUrl;
     private BigDecimal value;
-
 }

@@ -15,14 +15,9 @@ public class UserEntity {
     @Column(name = "id", updatable = false, nullable = false)
     private Long id;
 
-    @Column(name = "name")
-    private String name;
-
     @Column(name = "email")
     private String email;
 
     @Column(name = "password")
     private String password;
-
-
 }

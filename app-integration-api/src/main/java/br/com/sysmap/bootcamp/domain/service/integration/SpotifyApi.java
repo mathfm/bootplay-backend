@@ -1,6 +1,6 @@
 package br.com.sysmap.bootcamp.domain.service.integration;
 
-import br.com.sysmap.bootcamp.domain.entities.AlbumEntity;
+import br.com.sysmap.bootcamp.domain.model.AlbumModel;
 import br.com.sysmap.bootcamp.domain.mapper.AlbumMapper;
 import com.neovisionaries.i18n.CountryCode;
 import org.apache.hc.core5.http.ParseException;
@@ -21,10 +21,10 @@ public class SpotifyApi {
             .setClientSecret("ca986dd021364908957b6341de4a5308")
             .build();
 
-    public List<AlbumEntity> getAlbums(String search) throws IOException, ParseException, SpotifyWebApiException {
+    public List<AlbumModel> getAlbums(String search) throws IOException, ParseException, SpotifyWebApiException {
         spotifyApi.setAccessToken((getToken()));
 
-        return AlbumMapper.INSTANCE.toEntity(spotifyApi.searchAlbums(search)
+        return AlbumMapper.INSTANCE.toModel(spotifyApi.searchAlbums(search)
                 .market(CountryCode.BR)
                 .limit(25)
                 .build()
