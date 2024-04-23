@@ -13,7 +13,8 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 @NoArgsConstructor
 public class WalletDto implements Serializable {
-    private String email;
-    private BigDecimal value;
+
+  private String email;
+  private BigDecimal value;
 
 }

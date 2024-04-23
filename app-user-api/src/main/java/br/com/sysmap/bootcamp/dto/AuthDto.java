@@ -8,11 +8,11 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public class AuthDto {
-    private String email;
-    private String password;
-    private Long id;
-    private String token;
 
+  private String email;
+  private String password;
+  private Long id;
+  private String token;
 
 
 }

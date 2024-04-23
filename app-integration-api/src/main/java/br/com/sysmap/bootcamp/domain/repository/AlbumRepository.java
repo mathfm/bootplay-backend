@@ -9,10 +9,14 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface AlbumRepository extends JpaRepository <AlbumEntity, Long> {
-    List<AlbumEntity> findAllByUsers(UserEntity user);
-    Optional<AlbumEntity> findByIdSpotify(String idSpotify);
-    Optional<AlbumEntity> findByUsersAndIdSpotify(UserEntity user, String idSpotify);
-    void deleteByUsersAndIdSpotify(UserEntity user, String idSpotify);
+public interface AlbumRepository extends JpaRepository<AlbumEntity, Long> {
+
+  List<AlbumEntity> findAllByUsers(UserEntity user);
+
+  Optional<AlbumEntity> findByIdSpotify(String idSpotify);
+
+  Optional<AlbumEntity> findByUsersAndIdSpotify(UserEntity user, String idSpotify);
+
+  void deleteByUsersAndIdSpotify(UserEntity user, String idSpotify);
 
 }

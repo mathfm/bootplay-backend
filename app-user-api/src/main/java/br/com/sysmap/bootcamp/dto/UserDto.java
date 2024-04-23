@@ -14,12 +14,14 @@ import lombok.Setter;
 @Setter
 
 public class UserDto {
+
   @NotBlank
   private String name;
 
   @Email
   @NotNull
   private String email;
+
   @NotBlank
   @Size(min = 8)
   private String password;

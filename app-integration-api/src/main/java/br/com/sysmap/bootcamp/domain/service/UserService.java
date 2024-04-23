@@ -17,18 +17,18 @@ import java.util.Optional;
 @Service
 public class UserService implements UserDetailsService {
 
-    @Autowired
-    private UserRepository userRepository;
+  @Autowired
+  private UserRepository userRepository;
 
-    public UserEntity findByEmail(String email) {
-        return userRepository.findByEmail(email).orElse(null);
-    }
+  public UserEntity findByEmail(String email) {
+    return userRepository.findByEmail(email).orElse(null);
+  }
 
-    @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Optional<UserEntity> userDetail = userRepository.findByEmail(username);
-        return userDetail.map(user -> new User(user.getEmail(), user.getPassword(),
-                        new ArrayList<GrantedAuthority>()))
-                .orElseThrow(() -> new UsernameNotFoundException("User not found: " + username));
-    }
+  @Override
+  public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    Optional<UserEntity> userDetail = userRepository.findByEmail(username);
+    return userDetail.map(user -> new User(user.getEmail(), user.getPassword(),
+            new ArrayList<GrantedAuthority>()))
+        .orElseThrow(() -> new UsernameNotFoundException("User not found: " + username));
+  }
 }

@@ -11,8 +11,9 @@ import java.util.List;
 @Named("AlbumMapper")
 @Mapper
 public interface AlbumMapper {
-    AlbumMapper INSTANCE = Mappers.getMapper(AlbumMapper.class);
 
-    List<AlbumModel> toModel(AlbumSimplified[] albumSimplifieds);
+  AlbumMapper INSTANCE = Mappers.getMapper(AlbumMapper.class);
+
+  List<AlbumModel> toModel(AlbumSimplified[] albumSimplifieds);
 
 }

@@ -10,16 +10,17 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class SpringDocOpenApiConfig {
 
-    @Bean
-    public OpenAPI openAPI() {
-        return new OpenAPI()
-                .info(new Info()
-                        .title("Bootcamp Sysmap")
-                        .description("REST API USERS Bootcamp 2024 Sysmap")
-                        .version("v1")
-                        .termsOfService("http://swagger.io/terms/")
-                        .license(new License().name("Apache 2.0").url("https://www.apache.org/licenses/LICENSE-2.0"))
-                        .contact(new Contact().name("Fernando Santos").email("fernandomath.mds@gmail.com")));
-    }
+  @Bean
+  public OpenAPI openAPI() {
+    return new OpenAPI()
+        .info(new Info()
+            .title("Bootcamp Sysmap")
+            .description("REST API USERS Bootcamp 2024 Sysmap")
+            .version("v1")
+            .termsOfService("http://swagger.io/terms/")
+            .license(
+                new License().name("Apache 2.0").url("https://www.apache.org/licenses/LICENSE-2.0"))
+            .contact(new Contact().name("Fernando Santos").email("fernandomath.mds@gmail.com")));
+  }
 
 }

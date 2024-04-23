@@ -9,8 +9,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @OpenAPIDefinition(info = @Info(title = "Swagger OpenApi", version = "1", description = "API desenvolvida para testes do OpenApi"))
 public class BootcampSysmapUserApi {
 
-	public static void main(String[] args) {
-		SpringApplication.run(BootcampSysmapUserApi.class, args);
-	}
+  public static void main(String[] args) {
+    SpringApplication.run(BootcampSysmapUserApi.class, args);
+  }
 
 }

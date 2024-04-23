@@ -12,23 +12,24 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 
 @Component
-public class CustomAuthenticationProvider  implements AuthenticationProvider {
+public class CustomAuthenticationProvider implements AuthenticationProvider {
 
-    @Autowired
-    private UserService userDetaUserService;
+  @Autowired
+  private UserService userDetaUserService;
 
-    @Override
-    public Authentication authenticate(Authentication authentication) throws AuthenticationException {
-        try {
-            UserDetails userDetails = userDetaUserService.loadUserByUsername(authentication.getName());
-            return new UsernamePasswordAuthenticationToken(userDetails.getUsername(), userDetails.getPassword(), userDetails.getAuthorities());
-        }catch (UsernameNotFoundException e) {
-            throw new BadCredentialsException("Invalid Credentials");
-        }
+  @Override
+  public Authentication authenticate(Authentication authentication) throws AuthenticationException {
+    try {
+      UserDetails userDetails = userDetaUserService.loadUserByUsername(authentication.getName());
+      return new UsernamePasswordAuthenticationToken(userDetails.getUsername(),
+          userDetails.getPassword(), userDetails.getAuthorities());
+    } catch (UsernameNotFoundException e) {
+      throw new BadCredentialsException("Invalid Credentials");
     }
+  }
 
-    @Override
-    public boolean supports(Class<?> authentication) {
-        return UsernamePasswordAuthenticationToken.class.isAssignableFrom(authentication);
-    }
+  @Override
+  public boolean supports(Class<?> authentication) {
+    return UsernamePasswordAuthenticationToken.class.isAssignableFrom(authentication);
+  }
 }

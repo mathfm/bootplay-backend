@@ -10,14 +10,15 @@ import lombok.*;
 @Entity
 @Table(name = "users")
 public class UserEntity {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", updatable = false, nullable = false)
-    private Long id;
 
-    @Column(name = "email")
-    private String email;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Column(name = "id", updatable = false, nullable = false)
+  private Long id;
 
-    @Column(name = "password")
-    private String password;
+  @Column(name = "email")
+  private String email;
+
+  @Column(name = "password")
+  private String password;
 }

@@ -15,26 +15,26 @@ import java.util.List;
 @Configuration
 public class RabbitConfig {
 
-    @Bean
-    public RestTemplate restTemplate() {
-        return new RestTemplate();
-    }
+  @Bean
+  public RestTemplate restTemplate() {
+    return new RestTemplate();
+  }
 
-    @Bean
-    public Queue WalletQueue() {
-        return new Queue("WalletQueue");
-    }
+  @Bean
+  public Queue WalletQueue() {
+    return new Queue("WalletQueue");
+  }
 
-    @Bean
-    public WalletListener receiver() {
-        return new WalletListener();
-    }
+  @Bean
+  public WalletListener receiver() {
+    return new WalletListener();
+  }
 
-    @Bean
-    public SimpleMessageConverter converter() {
-        SimpleMessageConverter converter = new SimpleMessageConverter();
-        converter.setAllowedListPatterns(List.of("br.com.sysmap.bootcamp.dto.*", "java.util.*"));
-        return converter;
-    }
+  @Bean
+  public SimpleMessageConverter converter() {
+    SimpleMessageConverter converter = new SimpleMessageConverter();
+    converter.setAllowedListPatterns(List.of("br.com.sysmap.bootcamp.dto.*", "java.util.*"));
+    return converter;
+  }
 
 }

@@ -17,22 +17,23 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Table(name = "wallet")
 public class WalletEntity {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", updatable = false, nullable = false)
-    private Long id;
 
-    @Column(name = "balance")
-    private BigDecimal balance;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Column(name = "id", updatable = false, nullable = false)
+  private Long id;
 
-    @Column(name = "points")
-    private Long points;
+  @Column(name = "balance")
+  private BigDecimal balance;
 
-    @Column(name = "last_updated")
-    private LocalDateTime lastUpdated;
+  @Column(name = "points")
+  private Long points;
 
-    @OneToOne
-    @JoinColumn(name = "user_id")
-    private UserEntity user;
+  @Column(name = "last_updated")
+  private LocalDateTime lastUpdated;
+
+  @OneToOne
+  @JoinColumn(name = "user_id")
+  private UserEntity user;
 
 }

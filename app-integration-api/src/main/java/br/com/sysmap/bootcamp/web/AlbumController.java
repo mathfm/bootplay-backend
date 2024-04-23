@@ -19,31 +19,32 @@ import java.util.List;
 @RequestMapping("/albums")
 public class AlbumController {
 
-    private final AlbumService albumService;
+  private final AlbumService albumService;
 
-    @Operation(summary = "Retorna todos os albums encontrados na pesquisa")
-    @GetMapping("/all")
-    public ResponseEntity<List<AlbumModel>> getAlbum(@RequestParam("search") String search) throws IOException, ParseException, SpotifyWebApiException {
-        return  ResponseEntity.ok(this.albumService.getAlbums(search));
-    }
+  @Operation(summary = "Retorna todos os albums encontrados na pesquisa")
+  @GetMapping("/all")
+  public ResponseEntity<List<AlbumModel>> getAlbum(@RequestParam("search") String search)
+      throws IOException, ParseException, SpotifyWebApiException {
+    return ResponseEntity.ok(this.albumService.getAlbums(search));
+  }
 
-    @Operation(summary = "Realiza a compra de um album")
-    @PostMapping("/sale")
-    public ResponseEntity<Long> saveAlbum(@RequestBody AlbumDto entity) throws Exception {
-        return ResponseEntity.ok(this.albumService.saveAlbum(entity));
-    }
+  @Operation(summary = "Realiza a compra de um album")
+  @PostMapping("/sale")
+  public ResponseEntity<Long> saveAlbum(@RequestBody AlbumDto entity) throws Exception {
+    return ResponseEntity.ok(this.albumService.saveAlbum(entity));
+  }
 
-    @Operation(summary = "Retorna uma coleção de albuns do usuario")
-    @GetMapping("/my-collection")
-    public ResponseEntity<List<AlbumEntity>> getMyCollection() {
-        return  ResponseEntity.ok(this.albumService.getMyCollection());
-    }
+  @Operation(summary = "Retorna uma coleção de albuns do usuario")
+  @GetMapping("/my-collection")
+  public ResponseEntity<List<AlbumEntity>> getMyCollection() {
+    return ResponseEntity.ok(this.albumService.getMyCollection());
+  }
 
-    @Operation(summary = "Remove o album da coleção do usuario")
-    @DeleteMapping("/remove/{id}")
-    public ResponseEntity<Void> removeAlbum(@PathVariable("id") String id) {
-        this.albumService.deleteAlbum(id);
-        return ResponseEntity.ok().build();
-    }
+  @Operation(summary = "Remove o album da coleção do usuario")
+  @DeleteMapping("/remove/{id}")
+  public ResponseEntity<Void> removeAlbum(@PathVariable("id") String id) {
+    this.albumService.deleteAlbum(id);
+    return ResponseEntity.ok().build();
+  }
 
 }

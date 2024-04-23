@@ -16,28 +16,29 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 public class ServerSecurityConfig {
 
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
+  @Bean
+  public PasswordEncoder passwordEncoder() {
+    return new BCryptPasswordEncoder();
+  }
 
-    @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
-        return httpSecurity.csrf(AbstractHttpConfigurer::disable)
-                .authorizeHttpRequests(authorize -> authorize.requestMatchers("/users/auth",
-                        "/users/create",
-                        "/api/auth/**",
-                        "/v3/api-docs/**",
-                        "/v2/api-docs.yaml",
-                        "/swagger-ui/**", "/swagger-ui.html").permitAll())
-                .authorizeHttpRequests(authorize -> authorize.anyRequest().authenticated())
-                .httpBasic(Customizer.withDefaults())
-                .build();
-    }
+  @Bean
+  public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
+    return httpSecurity.csrf(AbstractHttpConfigurer::disable)
+        .authorizeHttpRequests(authorize -> authorize.requestMatchers("/users/auth",
+            "/users/create",
+            "/api/auth/**",
+            "/v3/api-docs/**",
+            "/v2/api-docs.yaml",
+            "/swagger-ui/**", "/swagger-ui.html").permitAll())
+        .authorizeHttpRequests(authorize -> authorize.anyRequest().authenticated())
+        .httpBasic(Customizer.withDefaults())
+        .build();
+  }
 
-    @Bean
-    public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
-        return  authenticationConfiguration.getAuthenticationManager();
-    }
+  @Bean
+  public AuthenticationManager authenticationManager(
+      AuthenticationConfiguration authenticationConfiguration) throws Exception {
+    return authenticationConfiguration.getAuthenticationManager();
+  }
 
 }

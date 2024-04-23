@@ -13,9 +13,10 @@ import java.math.BigDecimal;
 @Setter
 @NoArgsConstructor
 public class AlbumDto implements Serializable {
-    private String name;
-    private String idSpotify;
-    private String artistName;
-    private String imageUrl;
-    private BigDecimal value;
+
+  private String name;
+  private String idSpotify;
+  private String artistName;
+  private String imageUrl;
+  private BigDecimal value;
 }

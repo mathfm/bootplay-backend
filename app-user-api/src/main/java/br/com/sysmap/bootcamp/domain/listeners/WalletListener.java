@@ -12,16 +12,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 @RabbitListener(queues = "WalletQueue")
 public class WalletListener {
 
-    @Autowired
-    private WalletService walletService;
+  @Autowired
+  private WalletService walletService;
 
-    @RabbitHandler
-    public void recieve(WalletDto walletDto) {
-        try {
-            walletService.debit(walletDto);
-            log.info(walletDto.getEmail(), walletDto.getValue());
-        } catch (RuntimeException e) {
-          log.error("Error processing debit operation: {}", e.getMessage());
-        }
+  @RabbitHandler
+  public void recieve(WalletDto walletDto) {
+    try {
+      walletService.debit(walletDto);
+      log.info(walletDto.getEmail(), walletDto.getValue());
+    } catch (RuntimeException e) {
+      log.error("Error processing debit operation: {}", e.getMessage());
     }
+  }
 }

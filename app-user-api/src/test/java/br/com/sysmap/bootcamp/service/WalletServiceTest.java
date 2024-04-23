@@ -16,16 +16,11 @@ import java.math.BigDecimal;
 import java.time.DayOfWeek;
 import java.time.LocalDateTime;
 import java.util.Optional;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.ArgumentCaptor;
-import org.mockito.Captor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
@@ -54,8 +49,9 @@ class WalletServiceTest {
   @InjectMocks
   private WalletService walletService;
 
+  @DisplayName("Should return debit success ")
   @Test
-  void debitUserSucess() {
+  void debitUserSuccess() {
 
     UserEntity user = UserEntity.builder()
         .id(1L)
@@ -86,6 +82,7 @@ class WalletServiceTest {
 
   }
 
+  @DisplayName("Should return an RunTimeException ")
   @Test
   void debitUserFail() {
     UserEntity user = UserEntity.builder()
@@ -111,6 +108,7 @@ class WalletServiceTest {
     assertThrows(RuntimeException.class, () -> walletService.debit(walletDto));
   }
 
+  @DisplayName("Should return user wallet")
   @Test
   void getUserWallet() {
     UserEntity user = UserEntity.builder()
@@ -135,6 +133,5 @@ class WalletServiceTest {
     when(walletRepository.findByUser(user)).thenReturn(Optional.ofNullable(walletUser));
 
     assertEquals(walletUser, walletService.getUserWallet());
-
   }
 }

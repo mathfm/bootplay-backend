@@ -6,18 +6,18 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.client.RestTemplate;
 
 
-
 @Configuration
 public class RabbitConfig {
-    @Bean
-    public RestTemplate restTemplate() {
-        return new RestTemplate();
-    }
 
-    @Bean
-    public Queue WalletQueue() {
-        return new Queue("WalletQueue");
-    }
+  @Bean
+  public RestTemplate restTemplate() {
+    return new RestTemplate();
+  }
+
+  @Bean
+  public Queue WalletQueue() {
+    return new Queue("WalletQueue");
+  }
 
 
 }

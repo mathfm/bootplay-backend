@@ -27,12 +27,12 @@ import java.util.Optional;
 @Slf4j
 @Service
 public class AlbumService {
-    private final Queue queue;
-    private final RabbitTemplate template;
-    private final SpotifyApi spotifyApi;
-    private final AlbumRepository albumRepository;
-    private final UserService userService;
 
+  private final Queue queue;
+  private final RabbitTemplate template;
+  private final SpotifyApi spotifyApi;
+  private final AlbumRepository albumRepository;
+  private final UserService userService;
 
 //    public void teste() {
 //        log.info("teste");
@@ -42,71 +42,71 @@ public class AlbumService {
 //    }
 
 
-    public List<AlbumModel> getAlbums(String search) throws IOException, ParseException, SpotifyWebApiException {
-        return spotifyApi.getAlbums(search);
+  public List<AlbumModel> getAlbums(String search)
+      throws IOException, ParseException, SpotifyWebApiException {
+    return spotifyApi.getAlbums(search);
+  }
+
+  @Transactional(propagation = Propagation.REQUIRED)
+  public Long saveAlbum(AlbumDto album) {
+
+    Optional<AlbumEntity> verifySpotify = albumRepository.findByUsersAndIdSpotify(getUser(),
+        album.getIdSpotify());
+    if (verifySpotify.isPresent()) {
+      throw new RuntimeException("Usuario ja tem o album registrado");
     }
+    AlbumEntity albumSaved = createAlbum(album);
+    sendCreatedAlbumToQueue(albumSaved);
+    return albumSaved.getId();
 
-    @Transactional(propagation = Propagation.REQUIRED)
-    public Long saveAlbum(AlbumDto album) throws RuntimeException {
-        try {
-            Optional<AlbumEntity> verifySpotify = albumRepository.findByUsersAndIdSpotify(getUser(), album.getIdSpotify());
-            if (verifySpotify.isPresent()) {
-                throw new RuntimeException("Usuario ja tem o album registrado");
-            }
-            AlbumEntity albumSaved = createAlbum(album);
-            sendCreatedAlbumToQueue(albumSaved);
-            return albumSaved.getId();
-        }catch (RuntimeException e) {
-            throw new RuntimeException(e.getMessage());
-        }
 
+  }
+
+  private void sendCreatedAlbumToQueue(AlbumEntity albumSaved) {
+    try {
+      WalletDto walletDto = new WalletDto(albumSaved
+          .getUsers()
+          .getEmail(),
+          albumSaved.getValue());
+      log.info("Enviando dados {}", walletDto);
+      this.template.convertAndSend(queue.getName(), walletDto);
+    } catch (RuntimeException e) {
+      throw new RuntimeException(e.getMessage());
     }
+  }
 
-    private void sendCreatedAlbumToQueue(AlbumEntity albumSaved) {
-        try {
-            WalletDto walletDto = new WalletDto(albumSaved
-                .getUsers()
-                .getEmail(),
-                albumSaved.getValue());
-            log.info("Enviando dados {}", walletDto);
-            this.template.convertAndSend(queue.getName(), walletDto);
-        } catch (RuntimeException e) {
-            throw new RuntimeException(e.getMessage());
-        }
+  private AlbumEntity createAlbum(AlbumDto album) {
+    AlbumEntity entity = AlbumEntity.builder().idSpotify(album.getIdSpotify())
+        .name(album.getName())
+        .imageUrl(album.getImageUrl())
+        .value(album.getValue())
+        .artistName(album.getArtistName())
+        .users(getUser()).build();
+
+    return albumRepository.save(entity);
+  }
+
+  public List<AlbumEntity> getMyCollection() {
+    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+    UserEntity user = userService.findByEmail(authentication.getName());
+    return albumRepository.findAllByUsers(user);
+  }
+
+  @Transactional(propagation = Propagation.REQUIRED)
+  public void deleteAlbum(String albumId) {
+    Optional<AlbumEntity> albumUser = albumRepository.findByUsersAndIdSpotify(getUser(), albumId);
+    if (albumUser.isEmpty()) {
+      throw new RuntimeException("O usuario não possui esse album.");
     }
+    albumRepository.deleteByUsersAndIdSpotify(getUser(), albumId);
 
-    private AlbumEntity createAlbum(AlbumDto album) {
-        AlbumEntity entity = AlbumEntity.builder().idSpotify(album.getIdSpotify())
-                .name(album.getName())
-                .imageUrl(album.getImageUrl())
-                .value(album.getValue())
-                .artistName(album.getArtistName())
-                .users(getUser()).build();
+  }
 
-      return albumRepository.save(entity);
-    }
-
-    public List<AlbumEntity> getMyCollection() {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        UserEntity user = userService.findByEmail(authentication.getName());
-        return albumRepository.findAllByUsers(user);
-    }
-
-    @Transactional(propagation = Propagation.REQUIRED)
-    public void deleteAlbum(String albumId) {
-        Optional<AlbumEntity> albumUser = albumRepository.findByUsersAndIdSpotify(getUser(), albumId);
-        if (albumUser.isEmpty()) {
-            throw new RuntimeException("O usuario não possui esse album.");
-        }
-        albumRepository.deleteByUsersAndIdSpotify(getUser(), albumId);
-
-    }
-
-    private UserEntity getUser() {
-        String username = SecurityContextHolder.getContext().getAuthentication()
-                .getPrincipal().toString();
-        return userService.findByEmail(username);
-    }
+  private UserEntity getUser() {
+    String username = SecurityContextHolder.getContext().getAuthentication()
+        .getPrincipal().toString();
+    return userService.findByEmail(username);
+  }
 
 
 }

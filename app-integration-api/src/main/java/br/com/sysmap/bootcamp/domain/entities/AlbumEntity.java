@@ -24,28 +24,28 @@ import java.math.BigDecimal;
 @Table(name = "album")
 public class AlbumEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", updatable = false, nullable = false)
-    private Long id;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Column(name = "id", updatable = false, nullable = false)
+  private Long id;
 
-    @Column(name = "name", nullable = false, length = 150)
-    private String name;
+  @Column(name = "name", nullable = false, length = 150)
+  private String name;
 
-    @Column(name = "id_spotify", nullable = false, length = 100)
-    private String idSpotify;
+  @Column(name = "id_spotify", nullable = false, length = 100)
+  private String idSpotify;
 
-    @Column(name = "image_url", nullable = false, length = 150)
-    private String imageUrl;
+  @Column(name = "image_url", nullable = false, length = 150)
+  private String imageUrl;
 
-    @Column(name = "artist_name", nullable = false, length = 150)
-    private String artistName;
+  @Column(name = "artist_name", nullable = false, length = 150)
+  private String artistName;
 
-    @Column(name = "value", nullable = false)
-    private BigDecimal value;
+  @Column(name = "value", nullable = false)
+  private BigDecimal value;
 
-    @ManyToOne
-    @JoinColumn(name = "id_user")
-    private UserEntity users;
+  @ManyToOne
+  @JoinColumn(name = "id_user")
+  private UserEntity users;
 
 }
