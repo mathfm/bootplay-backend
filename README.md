@@ -11,4 +11,7 @@ Executar o seguinte comando na raiz do projeto
 ```
 
 #### IntegrationAPI rodando na porta: 8081
+#### Documentação http://localhost:8081/api/swagger-ui/index.html#/
+
 #### UserAPI rodando na porta: 8080
+#### Documentação http://localhost:8080/api/swagger-ui/index.html#/
