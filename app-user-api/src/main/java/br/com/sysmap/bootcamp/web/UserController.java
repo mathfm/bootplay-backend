@@ -10,6 +10,7 @@ import io.swagger.v3.oas.annotations.media.ExampleObject;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import jakarta.persistence.Table;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -25,29 +26,32 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/users")
+@Table(name = "Users")
 public class UserController {
 
     private final UserService userService;
 
-//    @Operation(summary = "Criar um novo usuário")
-//    @ApiResponses(value = {
-//            @ApiResponse(responseCode = "200", description = "Usuário criado com sucesso",
-//                    content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE,
-//                            schema = @Schema(implementation = UserEntity.class),
-//                            examples = @ExampleObject(value = "{\"id\": 1, \"name\": \"John Doe\", \"email\": \"john.doe@example.com\", \"password\": \"$2a$10$/CzClzOLs6UUQk82TuepIeZIIorsn0u8Bu06ASVC2z8USfej63HBG\"}")))
-//    })
+    @Operation(summary = "Criar um novo usuário")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Usuário criado com sucesso",
+                    content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE,
+                            schema = @Schema(implementation = UserDto.class),
+                            examples = @ExampleObject(value = "{\"id\": 1, \"name\": \"John Doe\", \"email\": \"john.doe@example.com\", \"password\": \"$2a$10$/CzClzOLs6UUQk82TuepIeZIIorsn0u8Bu06ASVC2z8USfej63HBG\"}")))
+    })
     @PostMapping("/create")
     public ResponseEntity<UserEntity> save(@RequestBody @Valid UserDto userDto) {
         return ResponseEntity.ok(this.userService.save(userDto));
     }
 
-//    @Operation(summary = "Buscar usuário lista de usuário ")
-//    @ApiResponses(value = {
-//            @ApiResponse(responseCode = "200", description = "Lista de usuários retornada com sucesso",
-//                    content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE,
-//                            schema = @Schema(implementation = UserEntity.class),
-//                            examples = @ExampleObject(value = "[{\"id\": 1, \"name\": \"John Doe\", \"email\": \"john.doe@example.com\"}, {\"id\": 2, \"name\": \"Jane Smith\", \"email\": \"jane.smith@example.com\"}]")))
-//    })
+    @Operation(summary = "Buscar usuário lista de usuário ")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Lista de usuários retornada com sucesso",
+                    content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE,
+                            schema = @Schema(implementation = UserEntity.class),
+                            examples = @ExampleObject(value = "[{\"id\": 1, \"name\": \"John Doe\", \"email\": \"john.doe@example.com\",\"password\": \"$2a$10$/CzClzOLs6UUQk82TuepIeZIIorsn0u8Bu06ASVC2z8USfej63HBG\" }, {\"id\": 2, \"name\": \"Jane Smith\", \"email\": \"jane.smith@example.com\", \"password\": \"$2a$10$/CzClzOLs6UUQk82TuepIe546Iorsn0u8Bu06ASVC2z8USfej63H41\"}]"
+                            )))
+                                })
+
     @GetMapping("/")
     public ResponseEntity<List<UserEntity>> list() {
         return ResponseEntity.ok(this.userService.getAllUser());
