@@ -5,6 +5,7 @@ import br.com.sysmap.bootcamp.domain.entities.WalletEntity;
 import br.com.sysmap.bootcamp.dto.WalletDto;
 import br.com.sysmap.bootcamp.service.WalletService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.persistence.Table;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -15,7 +16,7 @@ import java.math.BigDecimal;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/wallet")
-@Table(name = "Wallet")
+@Tag(name = "Wallet")
 public class WalletController {
     private final WalletService walletService;
 

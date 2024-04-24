@@ -5,6 +5,7 @@ import br.com.sysmap.bootcamp.domain.model.AlbumModel;
 import br.com.sysmap.bootcamp.domain.service.AlbumService;
 import br.com.sysmap.bootcamp.dto.AlbumDto;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.apache.hc.core5.http.ParseException;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +18,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/albums")
+@Tag(name = "Albums")
 public class AlbumController {
 
   private final AlbumService albumService;

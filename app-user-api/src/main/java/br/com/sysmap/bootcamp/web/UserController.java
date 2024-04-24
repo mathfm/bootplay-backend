@@ -10,6 +10,7 @@ import io.swagger.v3.oas.annotations.media.ExampleObject;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.persistence.Table;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
@@ -26,14 +27,14 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/users")
-@Table(name = "Users")
+@Tag(name = "Users")
 public class UserController {
 
     private final UserService userService;
 
     @Operation(summary = "Criar um novo usuário")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Usuário criado com sucesso",
+            @ApiResponse(responseCode = "201", description = "Usuário criado com sucesso",
                     content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE,
                             schema = @Schema(implementation = UserDto.class),
                             examples = @ExampleObject(value = "{\"id\": 1, \"name\": \"John Doe\", \"email\": \"john.doe@example.com\", \"password\": \"$2a$10$/CzClzOLs6UUQk82TuepIeZIIorsn0u8Bu06ASVC2z8USfej63HBG\"}")))
@@ -71,7 +72,10 @@ public class UserController {
     }
 
     @Operation(summary = "Atualizar um usuário existente")
-    @ApiResponse(responseCode = "401", description = "Credenciais inválidas")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "401", description = "Credenciais inválidas"),
+        @ApiResponse(responseCode = "201", description = "Usuário atualizado com sucesso")
+    })
     @PutMapping("/update")
     public ResponseEntity<UserEntity> updateUser(@RequestBody @Valid UserDto user) {
         return ResponseEntity.ok(this.userService.updateUser(user));
