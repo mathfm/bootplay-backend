@@ -28,6 +28,8 @@ Adicionar opção de editar e apagar usuário
 
 Executar o seguinte comando na raiz do projeto
 
+Deve ter uma key na api do spotify para fazer a utilização do projeto e substituir os campois clientId e clientSecret 
+
 ```bash
   docker-compose -f docker-compose.yml build
   docker-compose -f docker-compose.yml up
