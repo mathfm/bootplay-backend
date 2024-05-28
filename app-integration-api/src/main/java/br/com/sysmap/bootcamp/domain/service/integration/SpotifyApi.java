@@ -17,8 +17,8 @@ public class SpotifyApi {
 
   private se.michaelthelin.spotify.SpotifyApi spotifyApi = new se.michaelthelin.spotify.SpotifyApi
       .Builder()
-      .setClientId("8a1b85de62334e918b5b0261365977f4")
-      .setClientSecret("ca986dd021364908957b6341de4a5308")
+      .setClientId("inserir clientid spotify")
+      .setClientSecret("inserir clientSecret spotify")
       .build();
 
   public List<AlbumModel> getAlbums(String search)
